@@ -1,35 +1,41 @@
-# 📊 Painel de Acompanhamento Pessoal
+# Painel de Acompanhamento Pessoal
 
-Um dashboard minimalista, moderno e responsivo desenvolvido para centralizar, gerenciar e analisar métricas de rotina diária. O projeto integra o acompanhamento de metas de estudos, formação acadêmica e condicionamento físico em uma única interface (Single Page Application).
+Um dashboard minimalista e responsivo focado na gestão de métricas de produtividade. O projeto centraliza o acompanhamento de metas acadêmicas, desenvolvimento profissional e rotinas de saúde em uma única Single Page Application (SPA), garantindo uma visualização clara do progresso e da consistência ao longo do tempo.
 
-## 🚀 Funcionalidades Atuais
+## Funcionalidades Atuais
 
-A plataforma está dividida em módulos focados na produtividade e consistência:
+A plataforma está modularizada para atender a diferentes fluxos de acompanhamento contínuo:
 
-- **Visão Geral (Dashboard):** Painel analítico com a somatória de horas dedicadas a cada área de estudo e a taxa de sucesso dos treinos no mês vigente.
-- **Rotina Fitness:** - Calendário dinâmico mensal para *check* diário de atividades.
-  - Visualizador integrado de Fichas de Treino (rotinas de A a F, cardio e pilates).
-- **Ciência de Dados (Formação Alura):** Controle de progresso com barras de carregamento divididas pelas 4 fases principais da formação.
-- **MBA (Monitor de Disciplinas):** Acompanhamento de frequência nas aulas presenciais de sexta e sábado, registro de menções finais e diário de bordo.
-- **Faculdade (ADS):** Controle de frequência nas aulas noturnas e área para resumos de disciplinas de Análise e Desenvolvimento de Sistemas.
-- **Inglês:** Registro de horas de prática e vocabulário/anotações.
+- **Visão Geral (Dashboard):** Painel analítico que consolida horas de estudo por área de conhecimento e taxa de execução de atividades físicas no mês vigente.
+- **Gestão de Saúde e Condicionamento:** Calendário dinâmico com processamento de datas para registro diário de treinos e visualizador integrado de fichas de exercícios estruturadas.
+- **Ciência de Dados (Formação):** Controle de progresso em trilhas de aprendizagem de longa duração, com indicadores visuais de avanço segmentados por fase de estudo.
+- **Monitoramento Acadêmico (MBA e ADS):** Sistema de gestão de frequência presencial e noturna, registro de menções finais e diário de bordo para as disciplinas em curso.
+- **Desenvolvimento de Idiomas:** Registro em log de sessões de estudo, contabilização de horas e documentação de vocabulário.
 
-## 🛠️ Tecnologias Utilizadas
+## Stack Tecnológico
 
-Atualmente, o projeto foca na simplicidade, velocidade e design limpo:
+A arquitetura atual prioriza performance no lado do cliente, baixo acoplamento e um design limpo:
 
-- **HTML5:** Estruturação semântica.
-- **Tailwind CSS:** Framework de utilitários para um design responsivo, minimalista e focado em UI/UX.
-- **JavaScript (Vanilla):** Lógica de transição de páginas (SPA), manipulação de estado, cálculos de progresso e geração dinâmica de calendários.
-- **Local Storage:** Armazenamento persistente de dados diretamente no navegador do utilizador.
-- **Phosphor Icons:** Biblioteca de ícones moderna e consistente.
+- **HTML5:** Estruturação semântica da aplicação.
+- **Tailwind CSS:** Framework de utilitários para estilização responsiva, garantindo uma UI/UX padronizada e livre de excessos visuais.
+- **JavaScript (Vanilla):** Lógica de navegação SPA, manipulação de estado, processamento de datas e cálculo de métricas em tempo real.
+- **Local Storage:** Persistência de dados no lado do cliente, garantindo privacidade estrutural das informações cadastradas.
+- **Phosphor Icons:** Biblioteca de iconografia para sinalização visual limpa.
 
-## 🗺️ Roadmap (Próximos Passos)
+## Roadmap de Desenvolvimento
 
-Este projeto está em constante evolução. As futuras atualizações visam transformar esta interface estática numa aplicação full-stack orientada a dados:
+O projeto foi estruturado para escalar de uma interface estática para uma aplicação full-stack orientada a dados. As próximas etapas de implementação incluem:
 
-- [ ] **Migração de Dados:** Substituir o `localStorage` por uma base de dados em nuvem (ex: MongoDB ou PostgreSQL).
-- [ ] **Desenvolvimento de API:** Criar um backend (Node.js ou Python) para gerir as requisições e a segurança da aplicação.
-- [ ] **Visualização de Dados Avançada:** Integrar bibliotecas como Chart.js ou D3.js para gerar gráficos preditivos e comparativos sobre o rendimento ao longo dos meses.
-- [ ] **Exportação de Relatórios:** Capacidade de gerar ficheiros CSV ou PDF consolidados com o progresso trimestral.
-- [ ] **Autenticação de Utilizador:** Sistema de login para garantir a privacidade das anotações e métricas.
+- [ ] **Integração de Banco de Dados:** Substituição do armazenamento local por bases relacionais ou NoSQL em nuvem (ex: PostgreSQL, MongoDB).
+- [ ] **Desenvolvimento de API:** Criação de um serviço backend (Node.js/Python) para roteamento seguro e gestão centralizada de dados.
+- [ ] **Visualização Avançada de Dados:** Implementação de bibliotecas de gráficos (Chart.js ou D3.js) para análise de tendências de consistência e correlação de métricas.
+- [ ] **Exportação de Relatórios:** Módulo para extração de dados consolidados em formatos CSV ou PDF.
+- [ ] **Autenticação:** Sistema de login com criptografia para proteção dos registros e suporte a múltiplos usuários.
+
+## Como Executar Localmente
+
+A aplicação atual não possui dependências de servidor, permitindo execução imediata:
+
+1. Clone o repositório:
+   ```bash
+   git clone [https://github.com/SEU-USUARIO/NOME-DO-REPOSITORIO.git](https://github.com/SEU-USUARIO/NOME-DO-REPOSITORIO.git)
