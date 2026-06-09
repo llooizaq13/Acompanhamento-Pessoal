@@ -8,14 +8,25 @@
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <style>
         body { font-family: 'Inter', -apple-system, sans-serif; }
-        .page-section { display: none; }
-        .page-section.active { display: block; animation: fadeIn 0.4s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* O Segredo da Transição está aqui */
+        .page-section { 
+            display: none; /* Esconde todas as secções por padrão */
+        }
+        .page-section.active { 
+            display: block; /* Mostra apenas a secção com a classe 'active' */
+            animation: fadeIn 0.4s ease-in-out; 
+        }
+        
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
     </style>
 </head>
 <body class="bg-[#F8FAFC] text-slate-800 flex h-screen overflow-hidden antialiased">
 
-    <aside class="w-64 bg-white border-r border-slate-200 flex flex-col justify-between h-full">
+    <aside class="w-64 bg-white border-r border-slate-200 flex flex-col justify-between h-full shrink-0">
         <div class="p-6">
             <div class="flex items-center gap-3 mb-10">
                 <div class="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center font-medium text-lg">LC</div>
@@ -41,7 +52,7 @@
 
     <main class="flex-1 h-full overflow-y-auto p-10">
         
-        <section id="page-dashboard" class="page-section active max-w-5xl mx-auto">
+        <section id="page-dashboard" class="page-section active max-w-5xl mx-auto w-full">
             <header class="mb-8">
                 <h1 class="text-3xl font-light tracking-tight">Visão Geral</h1>
                 <p class="text-slate-500 mt-1">O teu resumo de consistência em todas as áreas.</p>
@@ -78,14 +89,14 @@
             </div>
         </section>
 
-        <section id="page-estudos" class="page-section max-w-5xl mx-auto">
+        <section id="page-estudos" class="page-section max-w-5xl mx-auto w-full">
             <header class="mb-8">
                 <h1 class="text-3xl font-light tracking-tight">Estudos Alura</h1>
                 <p class="text-slate-500 mt-1">Acompanhamento das 4 fases da formação.</p>
             </header>
 
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-6 flex gap-4 items-end">
-                <div class="flex-1">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-6 flex gap-4 items-end flex-wrap">
+                <div class="flex-1 min-w-[200px]">
                     <label class="block text-xs font-medium text-slate-500 mb-1.5">Fase de Estudo</label>
                     <select id="select-fase" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500">
                         <option value="fase1">Fase 1 — Python para Data Science</option>
@@ -105,7 +116,7 @@
                 </div>
         </section>
 
-        <section id="page-treinos" class="page-section max-w-5xl mx-auto">
+        <section id="page-treinos" class="page-section max-w-5xl mx-auto w-full">
             <header class="mb-8 flex justify-between items-end">
                 <div>
                     <h1 class="text-3xl font-light tracking-tight">Rotina Fitness</h1>
@@ -122,6 +133,187 @@
 
     </main>
 
-    <script src="app.js"></script>
+    <script>
+        // Configurações base
+        const METAS_ESTUDOS = {
+            fase1: { nome: "Fase 1 — Python", meta: 52, atuais: 2.5 },
+            fase2: { nome: "Fase 2 — DS Core", meta: 108, atuais: 0 },
+            fase3: { nome: "Fase 3 — Machine Learning", meta: 42, atuais: 0 },
+            fase4: { nome: "Fase 4 — Sprint Final", meta: 60, atuais: 0 }
+        };
+
+        const ROTINA_SEMANAL = [
+            { id: 'seg', dia: "Segunda-feira", treino: "🛌 Descanso / Ergométrica (opcional)" },
+            { id: 'ter', dia: "Terça-feira", treino: "🏋️ Treino D — Quadríceps" },
+            { id: 'qua', dia: "Quarta-feira", treino: "🏋️ Treino E — Costas e Bíceps" },
+            { id: 'qui', dia: "Quinta-feira", treino: "🧘 Pilates (7:00h)" },
+            { id: 'sex', dia: "Sexta-feira", treino: "🏋️ Treino F — Glúteo" },
+            { id: 'sab', dia: "Sábado", treino: "🏋️ Treino C — Cardio & Core" },
+            { id: 'dom', dia: "Domingo", treino: "🚴 Bike (Cedo)" }
+        ];
+
+        let appData = {
+            estudos: { ...METAS_ESTUDOS },
+            treinos: { seg: false, ter: false, qua: false, qui: false, sex: false, sab: false, dom: false }
+        };
+
+        // ===== FUNÇÃO PARA TRANSITAR DE PÁGINAS =====
+        function changePage(pageId) {
+            console.log("A mudar para a página:", pageId); // Ajuda a verificar se o clique funciona
+
+            // 1. Ocultar todas as páginas removendo a classe 'active'
+            document.querySelectorAll('.page-section').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // 2. Mostrar apenas a página selecionada
+            const paginaAlvo = document.getElementById(`page-${pageId}`);
+            if(paginaAlvo) {
+                paginaAlvo.classList.add('active');
+            }
+
+            // 3. Atualizar as cores do menu lateral
+            document.querySelectorAll('aside nav button').forEach(btn => {
+                btn.classList.remove('bg-slate-100', 'text-slate-900');
+                btn.classList.add('text-slate-500');
+            });
+            
+            const botaoAtivo = document.getElementById(`nav-${pageId}`);
+            if(botaoAtivo) {
+                botaoAtivo.classList.remove('text-slate-500');
+                botaoAtivo.classList.add('bg-slate-100', 'text-slate-900');
+            }
+
+            // 4. Atualizar os dados sempre que navegamos
+            renderUI(); 
+        }
+
+        // ===== LÓGICA DE DADOS =====
+        function loadData() {
+            const saved = localStorage.getItem('luizaTrackerData');
+            if (saved) {
+                appData = JSON.parse(saved);
+            }
+            renderUI();
+        }
+
+        function saveData() {
+            localStorage.setItem('luizaTrackerData', JSON.stringify(appData));
+            renderUI();
+        }
+
+        // ===== ESTUDOS =====
+        function adicionarHorasEstudo() {
+            const fase = document.getElementById('select-fase').value;
+            const horas = parseFloat(document.getElementById('input-horas').value);
+            
+            if (!isNaN(horas) && horas > 0) {
+                appData.estudos[fase].atuais += horas;
+                document.getElementById('input-horas').value = '';
+                saveData();
+            }
+        }
+
+        function renderEstudos() {
+            const container = document.getElementById('lista-fases');
+            if(!container) return;
+            container.innerHTML = '';
+            
+            let totalHoras = 0;
+            const totalMeta = 262;
+
+            Object.keys(appData.estudos).forEach(key => {
+                const fase = appData.estudos[key];
+                totalHoras += fase.atuais;
+                const percent = Math.min((fase.atuais / fase.meta) * 100, 100).toFixed(1);
+
+                container.innerHTML += `
+                    <div class="border border-slate-100 rounded-xl p-5 bg-white">
+                        <div class="flex justify-between items-center mb-2">
+                            <h4 class="font-medium text-sm text-slate-800">${fase.nome}</h4>
+                            <span class="text-xs font-medium text-slate-500">${fase.atuais}h / ${fase.meta}h</span>
+                        </div>
+                        <div class="w-full bg-slate-100 rounded-full h-1.5">
+                            <div class="bg-blue-500 h-1.5 rounded-full" style="width: ${percent}%"></div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Atualiza Dashboard (Estudos)
+            const elTotalHoras = document.getElementById('dash-total-horas');
+            const elProgressEstudos = document.getElementById('dash-progress-estudos');
+            if(elTotalHoras) elTotalHoras.innerText = totalHoras.toFixed(1);
+            if(elProgressEstudos) {
+                const dashPercent = (totalHoras / totalMeta) * 100;
+                setTimeout(() => {
+                    elProgressEstudos.style.width = `${Math.min(dashPercent, 100)}%`;
+                }, 100);
+            }
+        }
+
+        // ===== TREINOS =====
+        function toggleTreino(id) {
+            appData.treinos[id] = !appData.treinos[id];
+            saveData();
+        }
+
+        function resetTreinos() {
+            if(confirm('Limpar todos os registos de treinos desta semana?')) {
+                Object.keys(appData.treinos).forEach(k => appData.treinos[k] = false);
+                saveData();
+            }
+        }
+
+        function renderTreinos() {
+            const container = document.getElementById('workout-list');
+            if(!container) return;
+            container.innerHTML = '';
+            
+            let concluidos = 0;
+
+            ROTINA_SEMANAL.forEach(item => {
+                const isFeito = appData.treinos[item.id];
+                if(isFeito) concluidos++;
+
+                container.innerHTML += `
+                    <div class="flex items-center justify-between p-4 hover:bg-slate-50 transition-colors cursor-pointer" onclick="toggleTreino('${item.id}')">
+                        <div class="flex items-center gap-4">
+                            <div class="w-6 h-6 rounded border ${isFeito ? 'bg-emerald-500 border-emerald-500 flex items-center justify-center text-white' : 'border-slate-300 bg-white'}">
+                                ${isFeito ? '<i class="ph-bold ph-check text-sm"></i>' : ''}
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium ${isFeito ? 'text-slate-400 line-through' : 'text-slate-800'}">${item.dia}</p>
+                                <p class="text-xs ${isFeito ? 'text-slate-400' : 'text-slate-500'} mt-0.5">${item.treino}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Atualiza Dashboard (Treinos)
+            const elTreinosFeitos = document.getElementById('dash-treinos-feitos');
+            const elProgressTreinos = document.getElementById('dash-progress-treinos');
+            
+            if(elTreinosFeitos) elTreinosFeitos.innerText = concluidos;
+            if(elProgressTreinos) {
+                const dashPercentTreinos = (concluidos / 7) * 100;
+                setTimeout(() => {
+                    elProgressTreinos.style.width = `${dashPercentTreinos}%`;
+                }, 100);
+            }
+        }
+
+        // ===== INICIALIZAÇÃO =====
+        function renderUI() {
+            renderEstudos();
+            renderTreinos();
+        }
+
+        // Inicia a aplicação ao carregar a página
+        window.onload = () => {
+            loadData();
+        };
+    </script>
 </body>
 </html>
