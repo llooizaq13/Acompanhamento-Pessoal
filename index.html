@@ -9,12 +9,9 @@
     <style>
         body { font-family: 'Inter', -apple-system, sans-serif; }
         
-        /* O Segredo da Transição está aqui */
-        .page-section { 
-            display: none; /* Esconde todas as secções por padrão */
-        }
+        .page-section { display: none; }
         .page-section.active { 
-            display: block; /* Mostra apenas a secção com a classe 'active' */
+            display: block; 
             animation: fadeIn 0.4s ease-in-out; 
         }
         
@@ -26,9 +23,9 @@
 </head>
 <body class="bg-[#F8FAFC] text-slate-800 flex h-screen overflow-hidden antialiased">
 
-    <aside class="w-64 bg-white border-r border-slate-200 flex flex-col justify-between h-full shrink-0">
+    <aside class="w-64 bg-white border-r border-slate-200 flex flex-col justify-between h-full shrink-0 overflow-y-auto">
         <div class="p-6">
-            <div class="flex items-center gap-3 mb-10">
+            <div class="flex items-center gap-3 mb-8">
                 <div class="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center font-medium text-lg">LC</div>
                 <div>
                     <h2 class="font-medium text-sm">Luiza Cavalcanti</h2>
@@ -36,15 +33,27 @@
                 </div>
             </div>
 
-            <nav class="space-y-2">
-                <button onclick="changePage('dashboard')" id="nav-dashboard" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors bg-slate-100 text-slate-900">
+            <nav class="space-y-1.5">
+                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 mt-4 px-2">Geral</p>
+                <button onclick="changePage('dashboard')" id="nav-dashboard" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors bg-slate-100 text-slate-900">
                     <i class="ph ph-squares-four text-lg"></i> Dashboard
                 </button>
-                <button onclick="changePage('estudos')" id="nav-estudos" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-slate-500 hover:bg-slate-50 hover:text-slate-900">
-                    <i class="ph ph-book-open-text text-lg"></i> Estudos Alura
-                </button>
-                <button onclick="changePage('treinos')" id="nav-treinos" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-slate-500 hover:bg-slate-50 hover:text-slate-900">
+                <button onclick="changePage('treinos')" id="nav-treinos" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-slate-500 hover:bg-slate-50 hover:text-slate-900">
                     <i class="ph ph-barbell text-lg"></i> Rotina Fitness
+                </button>
+
+                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 mt-6 px-2">Estudos</p>
+                <button onclick="changePage('estudos')" id="nav-estudos" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-slate-500 hover:bg-slate-50 hover:text-slate-900">
+                    <i class="ph ph-chart-polar text-lg"></i> Ciência de Dados
+                </button>
+                <button onclick="changePage('ingles')" id="nav-ingles" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-slate-500 hover:bg-slate-50 hover:text-slate-900">
+                    <i class="ph ph-translate text-lg"></i> Inglês
+                </button>
+                <button onclick="changePage('mba')" id="nav-mba" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-slate-500 hover:bg-slate-50 hover:text-slate-900">
+                    <i class="ph ph-briefcase text-lg"></i> MBA
+                </button>
+                <button onclick="changePage('faculdade')" id="nav-faculdade" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-slate-500 hover:bg-slate-50 hover:text-slate-900">
+                    <i class="ph ph-graduation-cap text-lg"></i> Faculdade (ADS)
                 </button>
             </nav>
         </div>
@@ -58,15 +67,14 @@
                 <p class="text-slate-500 mt-1">O teu resumo de consistência em todas as áreas.</p>
             </header>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
                     <div class="flex justify-between items-center mb-6">
-                        <div class="flex items-center gap-2"><i class="ph-fill ph-book-open-text text-blue-500 text-xl"></i><h3 class="font-medium">Progresso de Estudos</h3></div>
-                        <span class="text-xs font-medium px-2.5 py-1 bg-blue-50 text-blue-600 rounded-full">Ciência de Dados</span>
+                        <div class="flex items-center gap-2"><i class="ph-fill ph-chart-polar text-blue-500 text-xl"></i><h3 class="font-medium">Data Science</h3></div>
                     </div>
                     <div class="flex items-end gap-2 mb-2">
                         <span id="dash-total-horas" class="text-4xl font-light text-slate-900">0</span>
-                        <span class="text-sm text-slate-500 mb-1">/ 262 horas concluídas</span>
+                        <span class="text-sm text-slate-500 mb-1">/ 262 horas</span>
                     </div>
                     <div class="w-full bg-slate-100 rounded-full h-2 mt-4">
                         <div id="dash-progress-estudos" class="bg-blue-500 h-2 rounded-full transition-all duration-1000" style="width: 0%"></div>
@@ -75,15 +83,42 @@
 
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
                     <div class="flex justify-between items-center mb-6">
-                        <div class="flex items-center gap-2"><i class="ph-fill ph-activity text-emerald-500 text-xl"></i><h3 class="font-medium">Aproveitamento Fitness</h3></div>
-                        <span class="text-xs font-medium px-2.5 py-1 bg-emerald-50 text-emerald-600 rounded-full">Esta Semana</span>
+                        <div class="flex items-center gap-2"><i class="ph-fill ph-activity text-emerald-500 text-xl"></i><h3 class="font-medium">Rotina Fitness</h3></div>
+                        <span class="text-xs font-medium px-2.5 py-1 bg-emerald-50 text-emerald-600 rounded-full">Semana</span>
                     </div>
                     <div class="flex items-end gap-2 mb-2">
                         <span id="dash-treinos-feitos" class="text-4xl font-light text-slate-900">0</span>
-                        <span class="text-sm text-slate-500 mb-1">/ 7 dias ativos</span>
+                        <span class="text-sm text-slate-500 mb-1">/ 7 dias</span>
                     </div>
                     <div class="w-full bg-slate-100 rounded-full h-2 mt-4">
                         <div id="dash-progress-treinos" class="bg-emerald-500 h-2 rounded-full transition-all duration-1000" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <h3 class="font-medium mb-4 text-slate-800">Formação Contínua (Horas Acumuladas)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-slate-50 border border-slate-100 p-4 rounded-xl flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center"><i class="ph ph-translate text-xl"></i></div>
+                        <div>
+                            <p class="text-xs text-slate-500 font-medium">Inglês</p>
+                            <p id="dash-horas-ingles" class="text-2xl font-light text-slate-900">0<span class="text-sm text-slate-400">h</span></p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-100 p-4 rounded-xl flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center"><i class="ph ph-briefcase text-xl"></i></div>
+                        <div>
+                            <p class="text-xs text-slate-500 font-medium">MBA</p>
+                            <p id="dash-horas-mba" class="text-2xl font-light text-slate-900">0<span class="text-sm text-slate-400">h</span></p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-100 p-4 rounded-xl flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center"><i class="ph ph-graduation-cap text-xl"></i></div>
+                        <div>
+                            <p class="text-xs text-slate-500 font-medium">Faculdade (ADS)</p>
+                            <p id="dash-horas-faculdade" class="text-2xl font-light text-slate-900">0<span class="text-sm text-slate-400">h</span></p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -91,8 +126,8 @@
 
         <section id="page-estudos" class="page-section max-w-5xl mx-auto w-full">
             <header class="mb-8">
-                <h1 class="text-3xl font-light tracking-tight">Estudos Alura</h1>
-                <p class="text-slate-500 mt-1">Acompanhamento das 4 fases da formação.</p>
+                <h1 class="text-3xl font-light tracking-tight">Ciência de Dados</h1>
+                <p class="text-slate-500 mt-1">Acompanhamento das metas da formação Alura.</p>
             </header>
 
             <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-6 flex gap-4 items-end flex-wrap">
@@ -131,10 +166,34 @@
             </div>
         </section>
 
+        <section id="page-ingles" class="page-section max-w-5xl mx-auto w-full">
+            <header class="mb-8">
+                <h1 class="text-3xl font-light tracking-tight">Inglês</h1>
+                <p class="text-slate-500 mt-1">Registo de prática, vocabulário e horas dedicadas.</p>
+            </header>
+            <div id="container-ingles"></div>
+        </section>
+
+        <section id="page-mba" class="page-section max-w-5xl mx-auto w-full">
+            <header class="mb-8">
+                <h1 class="text-3xl font-light tracking-tight">MBA</h1>
+                <p class="text-slate-500 mt-1">Acompanhamento das disciplinas e trabalhos do MBA.</p>
+            </header>
+            <div id="container-mba"></div>
+        </section>
+
+        <section id="page-faculdade" class="page-section max-w-5xl mx-auto w-full">
+            <header class="mb-8">
+                <h1 class="text-3xl font-light tracking-tight">Faculdade (ADS)</h1>
+                <p class="text-slate-500 mt-1">Registo de aulas, projetos e resumos do curso de Análise e Desenvolvimento de Sistemas.</p>
+            </header>
+            <div id="container-faculdade"></div>
+        </section>
+
     </main>
 
     <script>
-        // Configurações base
+        // ===== ESTADO DA APLICAÇÃO =====
         const METAS_ESTUDOS = {
             fase1: { nome: "Fase 1 — Python", meta: 52, atuais: 2.5 },
             fase2: { nome: "Fase 2 — DS Core", meta: 108, atuais: 0 },
@@ -154,25 +213,20 @@
 
         let appData = {
             estudos: { ...METAS_ESTUDOS },
-            treinos: { seg: false, ter: false, qua: false, qui: false, sex: false, sab: false, dom: false }
+            treinos: { seg: false, ter: false, qua: false, qui: false, sex: false, sab: false, dom: false },
+            registosExtra: {
+                ingles: [],
+                mba: [],
+                faculdade: []
+            }
         };
 
-        // ===== FUNÇÃO PARA TRANSITAR DE PÁGINAS =====
+        // ===== TRANSIÇÃO DE PÁGINAS =====
         function changePage(pageId) {
-            console.log("A mudar para a página:", pageId); // Ajuda a verificar se o clique funciona
-
-            // 1. Ocultar todas as páginas removendo a classe 'active'
-            document.querySelectorAll('.page-section').forEach(el => {
-                el.classList.remove('active');
-            });
-            
-            // 2. Mostrar apenas a página selecionada
+            document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
             const paginaAlvo = document.getElementById(`page-${pageId}`);
-            if(paginaAlvo) {
-                paginaAlvo.classList.add('active');
-            }
+            if(paginaAlvo) paginaAlvo.classList.add('active');
 
-            // 3. Atualizar as cores do menu lateral
             document.querySelectorAll('aside nav button').forEach(btn => {
                 btn.classList.remove('bg-slate-100', 'text-slate-900');
                 btn.classList.add('text-slate-500');
@@ -184,29 +238,41 @@
                 botaoAtivo.classList.add('bg-slate-100', 'text-slate-900');
             }
 
-            // 4. Atualizar os dados sempre que navegamos
+            // Inserir data de hoje automaticamente ao abrir uma página nova
+            const today = new Date().toISOString().split('T')[0];
+            if(['ingles', 'mba', 'faculdade'].includes(pageId)) {
+                const dateInput = document.getElementById(`input-data-${pageId}`);
+                if(dateInput && !dateInput.value) dateInput.value = today;
+            }
+
             renderUI(); 
         }
 
-        // ===== LÓGICA DE DADOS =====
+        // ===== LÓGICA DE DADOS LOCAL =====
         function loadData() {
-            const saved = localStorage.getItem('luizaTrackerData');
+            const saved = localStorage.getItem('luizaTrackerDataV2');
             if (saved) {
-                appData = JSON.parse(saved);
+                const parsed = JSON.parse(saved);
+                appData = { ...appData, ...parsed };
+                // Garantir que a nova estrutura existe para utilizadores que já tinham a versão anterior guardada
+                if(!appData.registosExtra) {
+                    appData.registosExtra = { ingles: [], mba: [], faculdade: [] };
+                }
             }
+            // Gerar a interface dos novos formulários
+            ['ingles', 'mba', 'faculdade'].forEach(cat => setupFormularioExtra(cat));
             renderUI();
         }
 
         function saveData() {
-            localStorage.setItem('luizaTrackerData', JSON.stringify(appData));
+            localStorage.setItem('luizaTrackerDataV2', JSON.stringify(appData));
             renderUI();
         }
 
-        // ===== ESTUDOS =====
+        // ===== LÓGICA: ESTUDOS E TREINOS (Originais) =====
         function adicionarHorasEstudo() {
             const fase = document.getElementById('select-fase').value;
             const horas = parseFloat(document.getElementById('input-horas').value);
-            
             if (!isNaN(horas) && horas > 0) {
                 appData.estudos[fase].atuais += horas;
                 document.getElementById('input-horas').value = '';
@@ -220,8 +286,6 @@
             container.innerHTML = '';
             
             let totalHoras = 0;
-            const totalMeta = 262;
-
             Object.keys(appData.estudos).forEach(key => {
                 const fase = appData.estudos[key];
                 totalHoras += fase.atuais;
@@ -240,26 +304,16 @@
                 `;
             });
 
-            // Atualiza Dashboard (Estudos)
             const elTotalHoras = document.getElementById('dash-total-horas');
             const elProgressEstudos = document.getElementById('dash-progress-estudos');
             if(elTotalHoras) elTotalHoras.innerText = totalHoras.toFixed(1);
-            if(elProgressEstudos) {
-                const dashPercent = (totalHoras / totalMeta) * 100;
-                setTimeout(() => {
-                    elProgressEstudos.style.width = `${Math.min(dashPercent, 100)}%`;
-                }, 100);
-            }
+            if(elProgressEstudos) elProgressEstudos.style.width = `${Math.min((totalHoras / 262) * 100, 100)}%`;
         }
 
-        // ===== TREINOS =====
-        function toggleTreino(id) {
-            appData.treinos[id] = !appData.treinos[id];
-            saveData();
-        }
-
+        function toggleTreino(id) { appData.treinos[id] = !appData.treinos[id]; saveData(); }
+        
         function resetTreinos() {
-            if(confirm('Limpar todos os registos de treinos desta semana?')) {
+            if(confirm('Limpar registos de treinos da semana?')) {
                 Object.keys(appData.treinos).forEach(k => appData.treinos[k] = false);
                 saveData();
             }
@@ -271,7 +325,6 @@
             container.innerHTML = '';
             
             let concluidos = 0;
-
             ROTINA_SEMANAL.forEach(item => {
                 const isFeito = appData.treinos[item.id];
                 if(isFeito) concluidos++;
@@ -291,26 +344,144 @@
                 `;
             });
 
-            // Atualiza Dashboard (Treinos)
             const elTreinosFeitos = document.getElementById('dash-treinos-feitos');
             const elProgressTreinos = document.getElementById('dash-progress-treinos');
-            
             if(elTreinosFeitos) elTreinosFeitos.innerText = concluidos;
-            if(elProgressTreinos) {
-                const dashPercentTreinos = (concluidos / 7) * 100;
-                setTimeout(() => {
-                    elProgressTreinos.style.width = `${dashPercentTreinos}%`;
-                }, 100);
+            if(elProgressTreinos) elProgressTreinos.style.width = `${(concluidos / 7) * 100}%`;
+        }
+
+        // ===== LÓGICA: NOVAS ABAS (Inglês, MBA, Faculdade) =====
+        
+        // Esta função injeta o formulário dinamicamente para não repetirmos HTML 3 vezes
+        function setupFormularioExtra(categoria) {
+            const container = document.getElementById(`container-${categoria}`);
+            if(!container) return;
+
+            let placeholderAssunto = "Ex: Aula 01, Módulo X...";
+            if(categoria === 'ingles') placeholderAssunto = "Ex: Tempos verbais, Listening, Vocabulário...";
+            if(categoria === 'faculdade') placeholderAssunto = "Ex: Lógica de Programação, Node.js...";
+
+            container.innerHTML = `
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-6">
+                    <div class="flex flex-col md:flex-row gap-4 mb-4">
+                        <div class="w-full md:w-40">
+                            <label class="block text-xs font-medium text-slate-500 mb-1.5">Data</label>
+                            <input type="date" id="input-data-${categoria}" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500">
+                        </div>
+                        <div class="w-full md:w-32">
+                            <label class="block text-xs font-medium text-slate-500 mb-1.5">Horas Estudadas</label>
+                            <input type="number" step="0.5" id="input-horas-${categoria}" placeholder="Ex: 1.5" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500">
+                        </div>
+                        <div class="flex-1">
+                            <label class="block text-xs font-medium text-slate-500 mb-1.5">Assunto Estudado</label>
+                            <input type="text" id="input-assunto-${categoria}" placeholder="${placeholderAssunto}" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500">
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-xs font-medium text-slate-500 mb-1.5">Anotações / Resumo (Opcional)</label>
+                        <textarea id="input-anotacoes-${categoria}" rows="2" placeholder="Pontos importantes a reter..." class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500"></textarea>
+                    </div>
+                    <div class="flex justify-end">
+                        <button onclick="adicionarRegistroExtra('${categoria}')" class="bg-slate-900 text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition">Registar Sessão</button>
+                    </div>
+                </div>
+                
+                <div class="flex items-center justify-between mb-4 mt-8">
+                    <h3 class="text-lg font-medium text-slate-800">Histórico de Sessões</h3>
+                </div>
+                
+                <div id="lista-${categoria}" class="space-y-3"></div>
+            `;
+        }
+
+        function adicionarRegistroExtra(categoria) {
+            const data = document.getElementById(`input-data-${categoria}`).value;
+            const horas = parseFloat(document.getElementById(`input-horas-${categoria}`).value);
+            const assunto = document.getElementById(`input-assunto-${categoria}`).value;
+            const anotacoes = document.getElementById(`input-anotacoes-${categoria}`).value;
+
+            if (data && !isNaN(horas) && horas > 0 && assunto.trim() !== "") {
+                const novoRegisto = {
+                    id: Date.now(),
+                    data: data,
+                    horas: horas,
+                    assunto: assunto,
+                    anotacoes: anotacoes
+                };
+
+                // Adiciona no início da lista (mais recente primeiro)
+                appData.registosExtra[categoria].unshift(novoRegisto);
+                
+                // Limpa campos (exceto a data)
+                document.getElementById(`input-horas-${categoria}`).value = '';
+                document.getElementById(`input-assunto-${categoria}`).value = '';
+                document.getElementById(`input-anotacoes-${categoria}`).value = '';
+                
+                saveData();
+            } else {
+                alert("Por favor, preenche a Data, as Horas e o Assunto.");
             }
+        }
+
+        function apagarRegistroExtra(categoria, id) {
+            if(confirm("Tens a certeza que queres apagar este registo?")) {
+                appData.registosExtra[categoria] = appData.registosExtra[categoria].filter(reg => reg.id !== id);
+                saveData();
+            }
+        }
+
+        function renderRegistosExtra() {
+            ['ingles', 'mba', 'faculdade'].forEach(categoria => {
+                const containerLista = document.getElementById(`lista-${categoria}`);
+                if(!containerLista) return;
+                
+                containerLista.innerHTML = '';
+                const registos = appData.registosExtra[categoria] || [];
+                let totalHoras = 0;
+
+                if(registos.length === 0) {
+                    containerLista.innerHTML = `<p class="text-sm text-slate-400 text-center py-8 border border-dashed border-slate-200 rounded-xl bg-white">Ainda não tens registos aqui. Começa a adicionar!</p>`;
+                } else {
+                    registos.forEach(reg => {
+                        totalHoras += reg.horas;
+                        
+                        // Formatar a data (YYYY-MM-DD para DD/MM/YYYY)
+                        const [ano, mes, dia] = reg.data.split('-');
+                        const dataFormatada = `${dia}/${mes}/${ano}`;
+
+                        containerLista.innerHTML += `
+                            <div class="bg-white p-5 rounded-xl border border-slate-100 shadow-sm flex flex-col sm:flex-row gap-4 justify-between items-start hover:border-slate-200 transition-colors">
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-3 mb-1.5">
+                                        <span class="text-xs font-medium px-2 py-1 bg-slate-100 text-slate-600 rounded-md">${dataFormatada}</span>
+                                        <h4 class="text-sm font-semibold text-slate-800">${reg.assunto}</h4>
+                                    </div>
+                                    ${reg.anotacoes ? `<p class="text-sm text-slate-500 mt-2 bg-slate-50 p-3 rounded-lg border border-slate-100">${reg.anotacoes.replace(/\\n/g, '<br>')}</p>` : ''}
+                                </div>
+                                <div class="shrink-0 flex flex-col items-end">
+                                    <span class="text-lg font-medium text-slate-700">${reg.horas}h</span>
+                                    <button onclick="apagarRegistroExtra('${categoria}', ${reg.id})" class="text-xs text-red-400 hover:text-red-600 mt-2 font-medium">Apagar</button>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+
+                // Atualizar o Dashboard
+                const elDashHoras = document.getElementById(`dash-horas-${categoria}`);
+                if(elDashHoras) {
+                    elDashHoras.innerHTML = `${totalHoras}<span class="text-sm text-slate-400">h</span>`;
+                }
+            });
         }
 
         // ===== INICIALIZAÇÃO =====
         function renderUI() {
             renderEstudos();
             renderTreinos();
+            renderRegistosExtra();
         }
 
-        // Inicia a aplicação ao carregar a página
         window.onload = () => {
             loadData();
         };
