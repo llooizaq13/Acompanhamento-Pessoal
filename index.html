@@ -3,63 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Tracker Pessoal</title>
+    <title>Painel Pessoal | Luiza</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body { font-family: 'Inter', -apple-system, sans-serif; }
+        .page-section { display: none; }
+        .page-section.active { display: block; animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased p-6 md:p-12">
+<body class="bg-[#F8FAFC] text-slate-800 flex h-screen overflow-hidden antialiased">
 
-    <div class="max-w-4xl mx-auto space-y-8">
-        
-        <header class="border-b border-gray-200 pb-6">
-            <h1 class="text-3xl font-light tracking-tight">Painel de Acompanhamento</h1>
-            <p class="text-gray-500 mt-2">Os teus registos de estudo e evolução fitness.</p>
-        </header>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            
-            <section class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-xl font-medium">Estudos: Ciência de Dados</h2>
-                    <span class="text-sm bg-blue-50 text-blue-600 px-3 py-1 rounded-full">Fase 1</span>
+    <aside class="w-64 bg-white border-r border-slate-200 flex flex-col justify-between h-full">
+        <div class="p-6">
+            <div class="flex items-center gap-3 mb-10">
+                <div class="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center font-medium text-lg">LC</div>
+                <div>
+                    <h2 class="font-medium text-sm">Luiza Cavalcanti</h2>
+                    <p class="text-xs text-slate-500">Painel de Acompanhamento</p>
                 </div>
-                
-                <div class="space-y-4">
-                    <div>
-                        <div class="flex justify-between text-sm mb-1">
-                            <span class="text-gray-600">Progresso da Meta (262h)</span>
-                            <span id="study-progress-text" class="font-medium">0%</span>
-                        </div>
-                        <div class="w-full bg-gray-100 rounded-full h-2.5">
-                            <div id="study-progress-bar" class="bg-blue-500 h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
-                        </div>
-                    </div>
+            </div>
 
-                    <div class="pt-4 border-t border-gray-50">
-                        <label class="block text-sm text-gray-600 mb-2">Adicionar horas estudadas hoje:</label>
-                        <div class="flex gap-2">
-                            <input type="number" id="study-hours" step="0.5" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500" placeholder="Ex: 1.5">
-                            <button onclick="addStudyHours()" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition">Registar</button>
-                        </div>
-                        <p class="text-xs text-gray-400 mt-2">Total acumulado: <span id="total-hours">0</span>h</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-xl font-medium">Rotina Fitness</h2>
-                    <span class="text-sm bg-emerald-50 text-emerald-600 px-3 py-1 rounded-full">Esta Semana</span>
-                </div>
-
-                <div id="workout-list" class="space-y-3">
-                    </div>
-            </section>
-
+            <nav class="space-y-2">
+                <button onclick="changePage('dashboard')" id="nav-dashboard" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors bg-slate-100 text-slate-900">
+                    <i class="ph ph-squares-four text-lg"></i> Dashboard
+                </button>
+                <button onclick="changePage('estudos')" id="nav-estudos" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-slate-500 hover:bg-slate-50 hover:text-slate-900">
+                    <i class="ph ph-book-open-text text-lg"></i> Estudos Alura
+                </button>
+                <button onclick="changePage('treinos')" id="nav-treinos" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-slate-500 hover:bg-slate-50 hover:text-slate-900">
+                    <i class="ph ph-barbell text-lg"></i> Rotina Fitness
+                </button>
+            </nav>
         </div>
-    </div>
+    </aside>
+
+    <main class="flex-1 h-full overflow-y-auto p-10">
+        
+        <section id="page-dashboard" class="page-section active max-w-5xl mx-auto">
+            <header class="mb-8">
+                <h1 class="text-3xl font-light tracking-tight">Visão Geral</h1>
+                <p class="text-slate-500 mt-1">O teu resumo de consistência em todas as áreas.</p>
+            </header>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="flex items-center gap-2"><i class="ph-fill ph-book-open-text text-blue-500 text-xl"></i><h3 class="font-medium">Progresso de Estudos</h3></div>
+                        <span class="text-xs font-medium px-2.5 py-1 bg-blue-50 text-blue-600 rounded-full">Ciência de Dados</span>
+                    </div>
+                    <div class="flex items-end gap-2 mb-2">
+                        <span id="dash-total-horas" class="text-4xl font-light text-slate-900">0</span>
+                        <span class="text-sm text-slate-500 mb-1">/ 262 horas concluídas</span>
+                    </div>
+                    <div class="w-full bg-slate-100 rounded-full h-2 mt-4">
+                        <div id="dash-progress-estudos" class="bg-blue-500 h-2 rounded-full transition-all duration-1000" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="flex items-center gap-2"><i class="ph-fill ph-activity text-emerald-500 text-xl"></i><h3 class="font-medium">Aproveitamento Fitness</h3></div>
+                        <span class="text-xs font-medium px-2.5 py-1 bg-emerald-50 text-emerald-600 rounded-full">Esta Semana</span>
+                    </div>
+                    <div class="flex items-end gap-2 mb-2">
+                        <span id="dash-treinos-feitos" class="text-4xl font-light text-slate-900">0</span>
+                        <span class="text-sm text-slate-500 mb-1">/ 7 dias ativos</span>
+                    </div>
+                    <div class="w-full bg-slate-100 rounded-full h-2 mt-4">
+                        <div id="dash-progress-treinos" class="bg-emerald-500 h-2 rounded-full transition-all duration-1000" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-estudos" class="page-section max-w-5xl mx-auto">
+            <header class="mb-8">
+                <h1 class="text-3xl font-light tracking-tight">Estudos Alura</h1>
+                <p class="text-slate-500 mt-1">Acompanhamento das 4 fases da formação.</p>
+            </header>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-6 flex gap-4 items-end">
+                <div class="flex-1">
+                    <label class="block text-xs font-medium text-slate-500 mb-1.5">Fase de Estudo</label>
+                    <select id="select-fase" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500">
+                        <option value="fase1">Fase 1 — Python para Data Science</option>
+                        <option value="fase2">Fase 2 — Data Science Core</option>
+                        <option value="fase3">Fase 3 — Machine Learning</option>
+                        <option value="fase4">Fase 4 — Sprint Final</option>
+                    </select>
+                </div>
+                <div class="w-32">
+                    <label class="block text-xs font-medium text-slate-500 mb-1.5">Tempo (Horas)</label>
+                    <input type="number" id="input-horas" step="0.5" placeholder="Ex: 1.5" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500">
+                </div>
+                <button onclick="adicionarHorasEstudo()" class="bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition">Registar</button>
+            </div>
+
+            <div id="lista-fases" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                </div>
+        </section>
+
+        <section id="page-treinos" class="page-section max-w-5xl mx-auto">
+            <header class="mb-8 flex justify-between items-end">
+                <div>
+                    <h1 class="text-3xl font-light tracking-tight">Rotina Fitness</h1>
+                    <p class="text-slate-500 mt-1">Marca os treinos concluídos ao longo da semana.</p>
+                </div>
+                <button onclick="resetTreinos()" class="text-sm text-slate-500 hover:text-slate-900 border border-slate-200 px-4 py-2 rounded-lg transition">Reiniciar Semana</button>
+            </header>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+                <div id="workout-list" class="divide-y divide-slate-100">
+                    </div>
+            </div>
+        </section>
+
+    </main>
 
     <script src="app.js"></script>
 </body>
