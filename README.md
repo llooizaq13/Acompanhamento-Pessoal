@@ -1,4 +1,4 @@
-# Painel de Acompanhamento Pessoal
+# ✔ Painel de Acompanhamento Pessoal
 
 Um dashboard minimalista e responsivo focado na gestão de métricas de produtividade. O projeto centraliza o acompanhamento de metas acadêmicas, desenvolvimento profissional e rotinas de saúde em uma única Single Page Application (SPA), garantindo uma visualização clara do progresso e da consistência ao longo do tempo.
 
@@ -32,10 +32,3 @@ O projeto foi estruturado para escalar de uma interface estática para uma aplic
 - [ ] **Exportação de Relatórios:** Módulo para extração de dados consolidados em formatos CSV ou PDF.
 - [ ] **Autenticação:** Sistema de login com criptografia para proteção dos registros e suporte a múltiplos usuários.
 
-## Como Executar Localmente
-
-A aplicação atual não possui dependências de servidor, permitindo execução imediata:
-
-1. Clone o repositório:
-   ```bash
-   git clone [https://github.com/SEU-USUARIO/NOME-DO-REPOSITORIO.git](https://github.com/SEU-USUARIO/NOME-DO-REPOSITORIO.git)
