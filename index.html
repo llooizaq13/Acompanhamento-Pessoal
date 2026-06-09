@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Tracker Pessoal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased p-6 md:p-12">
+
+    <div class="max-w-4xl mx-auto space-y-8">
+        
+        <header class="border-b border-gray-200 pb-6">
+            <h1 class="text-3xl font-light tracking-tight">Painel de Acompanhamento</h1>
+            <p class="text-gray-500 mt-2">Os teus registos de estudo e evolução fitness.</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <section class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-medium">Estudos: Ciência de Dados</h2>
+                    <span class="text-sm bg-blue-50 text-blue-600 px-3 py-1 rounded-full">Fase 1</span>
+                </div>
+                
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="text-gray-600">Progresso da Meta (262h)</span>
+                            <span id="study-progress-text" class="font-medium">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-100 rounded-full h-2.5">
+                            <div id="study-progress-bar" class="bg-blue-500 h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-gray-50">
+                        <label class="block text-sm text-gray-600 mb-2">Adicionar horas estudadas hoje:</label>
+                        <div class="flex gap-2">
+                            <input type="number" id="study-hours" step="0.5" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500" placeholder="Ex: 1.5">
+                            <button onclick="addStudyHours()" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition">Registar</button>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-2">Total acumulado: <span id="total-hours">0</span>h</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-medium">Rotina Fitness</h2>
+                    <span class="text-sm bg-emerald-50 text-emerald-600 px-3 py-1 rounded-full">Esta Semana</span>
+                </div>
+
+                <div id="workout-list" class="space-y-3">
+                    </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
