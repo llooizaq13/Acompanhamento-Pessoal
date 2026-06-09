@@ -1,4 +1,4 @@
-# ✔ Painel de Acompanhamento Pessoal
+# 📝 Painel de Acompanhamento Pessoal
 
 Um dashboard minimalista e responsivo focado na gestão de métricas de produtividade. O projeto centraliza o acompanhamento de metas acadêmicas, desenvolvimento profissional e rotinas de saúde em uma única Single Page Application (SPA), garantindo uma visualização clara do progresso e da consistência ao longo do tempo.
 
