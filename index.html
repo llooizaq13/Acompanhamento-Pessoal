@@ -3,33 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Pessoal | Luiza</title>
+    <title>Sistema Integrado de Produtividade | Luiza Cavalcanti</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <style>
         body { font-family: 'Inter', -apple-system, sans-serif; }
         .page-section { display: none; }
-        .page-section.active { display: block; animation: fadeIn 0.4s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        /* Esconder scrollbar na modal de treinos */
+        .page-section.active { display: block; animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .heatmap-cell { width: 10px; height: 10px; transition: all 0.2s; }
     </style>
 </head>
 <body class="bg-[#F8FAFC] text-slate-800 flex h-screen overflow-hidden antialiased">
 
-    <aside class="w-64 bg-white border-r border-slate-200 flex flex-col justify-between h-full shrink-0 overflow-y-auto">
-        <div class="p-6">
-            <div class="flex items-center gap-3 mb-8">
+    <aside class="w-64 bg-white border-r border-slate-200 flex flex-col justify-between h-full shrink-0 overflow-hidden">
+        <div class="p-6 flex flex-col h-full overflow-y-auto no-scrollbar">
+            <div class="flex items-center gap-3 mb-6">
                 <div class="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center font-medium text-lg">LC</div>
                 <div>
                     <h2 class="font-medium text-sm">Luiza Cavalcanti</h2>
-                    <p class="text-xs text-slate-500">Painel de Acompanhamento</p>
+                    <p class="text-xs text-slate-500">Métricas Analíticas</p>
                 </div>
             </div>
 
-            <nav class="space-y-1.5">
-                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 mt-4 px-2">Geral</p>
+            <nav class="space-y-1">
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2 mt-2 px-2">Geral</p>
                 <button onclick="changePage('dashboard')" id="nav-dashboard" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors bg-slate-100 text-slate-900">
                     <i class="ph ph-squares-four text-lg"></i> Dashboard
                 </button>
@@ -37,12 +37,9 @@
                     <i class="ph ph-barbell text-lg"></i> Rotina Fitness
                 </button>
 
-                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 mt-6 px-2">Estudos</p>
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2 mt-4 px-2">Core Académico</p>
                 <button onclick="changePage('estudos')" id="nav-estudos" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-slate-500 hover:bg-slate-50 hover:text-slate-900">
                     <i class="ph ph-chart-polar text-lg"></i> Ciência de Dados
-                </button>
-                <button onclick="changePage('ingles')" id="nav-ingles" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-slate-500 hover:bg-slate-50 hover:text-slate-900">
-                    <i class="ph ph-translate text-lg"></i> Inglês
                 </button>
                 <button onclick="changePage('mba')" id="nav-mba" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-slate-500 hover:bg-slate-50 hover:text-slate-900">
                     <i class="ph ph-briefcase text-lg"></i> MBA
@@ -50,6 +47,15 @@
                 <button onclick="changePage('faculdade')" id="nav-faculdade" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-slate-500 hover:bg-slate-50 hover:text-slate-900">
                     <i class="ph ph-graduation-cap text-lg"></i> Faculdade (ADS)
                 </button>
+
+                <div class="pt-4 border-t border-slate-100 mt-4">
+                    <div class="flex items-center justify-between px-2 mb-2">
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Módulos Customizados</span>
+                        <button onclick="changePage('config-atividades')" title="Gerenciar Módulos" class="text-slate-400 hover:text-slate-900 transition-colors"><i class="ph ph-gear text-base"></i></button>
+                    </div>
+                    <div id="sidebar-custom-activities" class="space-y-1">
+                        </div>
+                </div>
             </nav>
         </div>
     </aside>
@@ -59,13 +65,13 @@
         <section id="page-dashboard" class="page-section active max-w-5xl mx-auto w-full">
             <header class="mb-8">
                 <h1 class="text-3xl font-light tracking-tight">Visão Geral</h1>
-                <p class="text-slate-500 mt-1">O teu resumo de consistência em todas as áreas.</p>
+                <p class="text-slate-500 mt-1">Consolidação de indicadores e consistência operacional.</p>
             </header>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
                     <div class="flex justify-between items-center mb-6">
-                        <div class="flex items-center gap-2"><i class="ph-fill ph-chart-polar text-blue-500 text-xl"></i><h3 class="font-medium">Data Science</h3></div>
+                        <div class="flex items-center gap-2"><i class="ph-fill ph-chart-polar text-blue-500 text-xl"></i><h3 class="font-medium">Data Science (Alura)</h3></div>
                     </div>
                     <div class="flex items-end gap-2 mb-2">
                         <span id="dash-total-horas" class="text-4xl font-light text-slate-900">0</span>
@@ -79,11 +85,11 @@
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
                     <div class="flex justify-between items-center mb-6">
                         <div class="flex items-center gap-2"><i class="ph-fill ph-activity text-emerald-500 text-xl"></i><h3 class="font-medium">Rotina Fitness</h3></div>
-                        <span class="text-xs font-medium px-2.5 py-1 bg-emerald-50 text-emerald-600 rounded-full" id="dash-mes-label">Mês Atual</span>
+                        <span class="text-xs font-medium px-2.5 py-1 bg-emerald-50 text-emerald-600 rounded-full" id="dash-mes-label">Mês</span>
                     </div>
                     <div class="flex items-end gap-2 mb-2">
                         <span id="dash-treinos-feitos" class="text-4xl font-light text-slate-900">0</span>
-                        <span class="text-sm text-slate-500 mb-1" id="dash-treinos-total">/ 30 dias ativos</span>
+                        <span class="text-sm text-slate-500 mb-1" id="dash-treinos-total">/ 30 dias</span>
                     </div>
                     <div class="w-full bg-slate-100 rounded-full h-2 mt-4">
                         <div id="dash-progress-treinos" class="bg-emerald-500 h-2 rounded-full transition-all duration-1000" style="width: 0%"></div>
@@ -92,38 +98,95 @@
             </div>
 
             <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                <h3 class="font-medium mb-4 text-slate-800">Formação Contínua (Horas Acumuladas)</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="bg-slate-50 border border-slate-100 p-4 rounded-xl flex items-center gap-4">
-                        <div class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center"><i class="ph ph-translate text-xl"></i></div>
-                        <div>
-                            <p class="text-xs text-slate-500 font-medium">Inglês</p>
-                            <p id="dash-horas-ingles" class="text-2xl font-light text-slate-900">0<span class="text-sm text-slate-400">h</span></p>
-                        </div>
+                <h3 class="font-medium mb-4 text-slate-800">Indicadores de Atividades Customizadas</h3>
+                <div id="dash-custom-summary-grid" class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     </div>
-                    <div class="bg-slate-50 border border-slate-100 p-4 rounded-xl flex items-center gap-4">
-                        <div class="w-10 h-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center"><i class="ph ph-briefcase text-xl"></i></div>
-                        <div>
-                            <p class="text-xs text-slate-500 font-medium">MBA</p>
-                            <p id="dash-horas-mba" class="text-2xl font-light text-slate-900">0<span class="text-sm text-slate-400">h</span></p>
-                        </div>
+            </div>
+        </section>
+
+        <section id="page-config-atividades" class="page-section max-w-5xl mx-auto w-full">
+            <header class="mb-8">
+                <h1 class="text-3xl font-light tracking-tight">Gestão de Módulos</h1>
+                <p class="text-slate-500 mt-1">Configuração e instanciação de novas rotinas de monitoramento.</p>
+            </header>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-6">
+                <h3 class="text-sm font-semibold text-slate-700 mb-4">Criar Novo Monitor de Atividade</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-500 mb-1.5">Nome do Módulo</label>
+                        <input type="text" id="custom-act-title" placeholder="Ex: Inglês, Dev de Sistemas" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-slate-900">
                     </div>
-                    <div class="bg-slate-50 border border-slate-100 p-4 rounded-xl flex items-center gap-4">
-                        <div class="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center"><i class="ph ph-graduation-cap text-xl"></i></div>
-                        <div>
-                            <p class="text-xs text-slate-500 font-medium">Faculdade (ADS)</p>
-                            <p id="dash-horas-faculdade" class="text-2xl font-light text-slate-900">0<span class="text-sm text-slate-400">h</span></p>
-                        </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-500 mb-1.5">Métrica de Acompanhamento</label>
+                        <select id="custom-act-type" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-slate-900">
+                            <option value="days">Frequência (Dias Ativos)</option>
+                            <option value="hours">Contabilização (Horas Dedicadas)</option>
+                        </select>
                     </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-500 mb-1.5">Sinalização Visual (Ícone)</label>
+                        <select id="custom-act-icon" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-slate-900">
+                            <option value="ph-translate">Tradutor / Idiomas</option>
+                            <option value="ph-code">Código / Engenharia</option>
+                            <option value="ph-book">Livro / Leitura</option>
+                            <option value="ph-brain">Cérebro / Pesquisa</option>
+                            <option value="ph-target">Alvo / Metas</option>
+                            <option value="ph-star">Estrela / Destaques</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="flex justify-end">
+                    <button onclick="criarNovaAtividade()" class="bg-slate-900 text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition shadow-sm">Instanciar Módulo</button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-sm">
+                <div class="p-4 bg-slate-50 border-b border-slate-100"><h4 class="text-xs font-semibold text-slate-600">Módulos Ativos</h4></div>
+                <div id="custom-act-manage-list" class="divide-y divide-slate-100"></div>
+            </div>
+        </section>
+
+        <section id="page-dynamic-activity" class="page-section max-w-5xl mx-auto w-full">
+            <header class="mb-6 flex justify-between items-start">
+                <div>
+                    <h1 id="dyn-act-title" class="text-3xl font-light tracking-tight">Atividade</h1>
+                    <p id="dyn-act-subtitle" class="text-slate-500 mt-1">Métricas de acompanhamento anual.</p>
+                </div>
+                <div id="dyn-act-badge"></div>
+            </header>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-6">
+                <h3 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">Matriz de Consistência Anual (2026)</h3>
+                <div class="overflow-x-auto no-scrollbar">
+                    <div id="dyn-act-heatmap-container" class="flex flex-col gap-1 min-w-[760px]">
+                        </div>
+                </div>
+                <div class="flex items-center justify-end gap-2 text-[10px] text-slate-400 mt-4">
+                    <span>Menos ativo</span>
+                    <div class="w-2.5 h-2.5 bg-slate-100 rounded-sm"></div>
+                    <div class="w-2.5 h-2.5 bg-indigo-200 rounded-sm"></div>
+                    <div class="w-2.5 h-2.5 bg-indigo-400 rounded-sm"></div>
+                    <div class="w-2.5 h-2.5 bg-indigo-600 rounded-sm"></div>
+                    <span>Mais ativo</span>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <h3 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">Log de Entrada Manual</h3>
+                <div class="flex gap-4 items-end max-w-xl">
+                    <div class="w-40">
+                        <label class="block text-xs font-medium text-slate-500 mb-1">Data</label>
+                        <input type="date" id="dyn-input-data" class="w-full border border-slate-200 rounded-lg px-3 py-1.5 text-sm focus:outline-none">
+                    </div>
+                    <div class="w-32" id="dyn-input-val-container">
+                        </div>
+                    <button onclick="salvarLogManualDinamico()" class="bg-slate-950 text-white px-4 py-1.5 rounded-lg text-sm font-medium hover:bg-slate-800 transition">Atualizar Registro</button>
                 </div>
             </div>
         </section>
 
         <section id="page-estudos" class="page-section max-w-5xl mx-auto w-full">
-            <header class="mb-8">
-                <h1 class="text-3xl font-light tracking-tight">Ciência de Dados</h1>
-                <p class="text-slate-500 mt-1">Acompanhamento das metas da formação Alura.</p>
-            </header>
             <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-6 flex gap-4 items-end flex-wrap">
                 <div class="flex-1 min-w-[200px]">
                     <label class="block text-xs font-medium text-slate-500 mb-1.5">Fase de Estudo</label>
@@ -145,45 +208,30 @@
 
         <section id="page-treinos" class="page-section max-w-5xl mx-auto w-full">
             <header class="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
-                <div>
-                    <h1 class="text-3xl font-light tracking-tight">Rotina Fitness</h1>
-                    <p class="text-slate-500 mt-1">Registo diário e histórico mensal do teu progresso.</p>
-                </div>
-                <div class="flex gap-3">
-                    <button onclick="abrirFichasTreino()" class="flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition">
-                        <i class="ph ph-list-magnifying-glass text-lg"></i> Ver Fichas de Exercícios
-                    </button>
-                </div>
+                <button onclick="abrirFichasTreino()" class="flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition"><i class="ph ph-list-magnifying-glass text-lg"></i> Ver Fichas de Exercícios</button>
             </header>
-
             <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden mb-8">
                 <div class="bg-slate-50 p-4 border-b border-slate-100 flex items-center justify-between">
-                    <h3 class="font-medium text-slate-700 flex items-center gap-2"><i class="ph ph-calendar-blank text-lg"></i> Calendário de Acompanhamento</h3>
-                    <select id="select-mes-treino" onchange="renderTreinosMensal()" class="border border-slate-200 bg-white rounded-lg px-3 py-1.5 text-sm font-medium focus:outline-none focus:border-emerald-500">
-                        <option value="2026-05">Maio 2026</option>
-                        <option value="2026-06">Junho 2026</option>
-                        <option value="2026-07">Julho 2026</option>
-                        <option value="2026-08">Agosto 2026</option>
-                        <option value="2026-09">Setembro 2026</option>
-                        <option value="2026-10">Outubro 2026</option>
-                        <option value="2026-11">Novembro 2026</option>
-                        <option value="2026-12">Dezembro 2026</option>
-                    </select>
+                    <h3 class="font-medium text-slate-700 flex items-center gap-2"><i class="ph ph-calendar-blank text-lg"></i> Calendário Fitness</h3>
+                    <select id="select-mes-treino" onchange="renderTreinosMensal()" class="border border-slate-200 bg-white rounded-lg px-3 py-1.5 text-sm font-medium focus:outline-none"></select>
                 </div>
-                <div id="workout-month-list" class="divide-y divide-slate-100 max-h-[600px] overflow-y-auto">
-                    </div>
+                <div id="workout-month-list" class="divide-y divide-slate-100 max-h-[600px] overflow-y-auto"></div>
             </div>
         </section>
 
-        <section id="page-ingles" class="page-section max-w-5xl mx-auto w-full"><div id="container-ingles"></div></section>
         <section id="page-mba" class="page-section max-w-5xl mx-auto w-full">
-            <header class="mb-6"><h1 class="text-3xl font-light tracking-tight">MBA</h1><p class="text-slate-500 mt-1">Controle de frequência e disciplinas.</p></header>
             <div id="grid-mba-disciplinas" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8"></div>
-            <div id="container-mba"></div>
         </section>
+
         <section id="page-faculdade" class="page-section max-w-5xl mx-auto w-full">
-            <header class="mb-6"><h1 class="text-3xl font-light tracking-tight">Faculdade (ADS)</h1></header>
-            <div id="container-faculdade"></div>
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 mb-6">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                    <div>
+                        <h3 class="text-sm font-medium text-slate-700 flex items-center gap-2"><i class="ph ph-calendar-check text-lg text-purple-500"></i> Frequência das Aulas (Noite)</h3>
+                    </div>
+                    <div id="linha-freq-faculdade" class="flex flex-wrap gap-2"></div>
+                </div>
+            </div>
         </section>
 
     </main>
@@ -194,98 +242,11 @@
                 <h2 class="text-xl font-medium text-slate-800 flex items-center gap-2"><i class="ph ph-clipboard-text text-2xl text-emerald-600"></i> Fichas de Referência</h2>
                 <button onclick="fecharFichasTreino()" class="text-slate-400 hover:text-slate-700 w-8 h-8 flex items-center justify-center bg-white rounded-full border border-slate-200"><i class="ph ph-x"></i></button>
             </div>
-            
-            <div class="p-6 overflow-y-auto no-scrollbar" id="modal-fichas-content">
-                </div>
+            <div class="p-6 overflow-y-auto no-scrollbar" id="modal-fichas-content"></div>
         </div>
     </div>
 
     <script>
-        // ===== DADOS DOS TREINOS DETALHADOS (Importados do CSV) =====
-        const FICHAS_TREINO = [
-            { id: "A", cor: "blue", titulo: "TREINO A — PEITO, OMBRO E TRÍCEPS", 
-              exercicios: [
-                { n: "Alongamento peitoral + Mobilidade de ombro", s: "3", r: "12", i: "60''" },
-                { n: "Supino reto barra + Crucifixo inclinado c/ halteres", s: "4", r: "12", i: "1:30'" },
-                { n: "Cross Over na Polia Alta", s: "4", r: "10", i: "1:30'" },
-                { n: "Desenvolvimento máquina (pronada) + Elevação lateral", s: "4", r: "12", i: "1:30'" },
-                { n: "Elevação frontal com halteres", s: "4", r: "10-12", i: "1:30'" },
-                { n: "Tríceps barra cross + Tríceps inverso", s: "4", r: "12", i: "1:30'" },
-                { n: "Tríceps corda cross + Francês", s: "3", r: "12", i: "1:30'" }
-              ]
-            },
-            { id: "B", cor: "purple", titulo: "TREINO B — POSTERIOR", 
-              exercicios: [
-                { n: "Mobilidade tornozelo + Alongamento posteriores", s: "3", r: "12", i: "60''" },
-                { n: "Abdutora máquina", s: "4", r: "10-12", i: "60''" },
-                { n: "Flexora sentada + Stiff com Halter", s: "4", r: "12", i: "2:00'" },
-                { n: "Flexora deitada + Bom dia com Halter", s: "4", r: "12", i: "1:30'" }
-              ]
-            },
-            { id: "C", cor: "red", titulo: "TREINO C — CARDIO & CORE", 
-              exercicios: [
-                { n: "Bicicleta Ergométrica ou Esteira", s: "1", r: "30-40 min", i: "-" },
-                { n: "Prancha Isométrica", s: "4", r: "1 min", i: "45''" },
-                { n: "Abdominal Supra (solo)", s: "4", r: "20", i: "45''" },
-                { n: "Abdominal Infra", s: "4", r: "20", i: "45''" }
-              ]
-            },
-            { id: "D", cor: "orange", titulo: "TREINO D — QUADRÍCEPS", 
-              exercicios: [
-                { n: "Mobilidade quadril + Tornozelo + Cócoras", s: "3", r: "15", i: "2'" },
-                { n: "Agachamento smith + Isometria 30 seg", s: "4", r: "10-12", i: "2'" },
-                { n: "Leg press", s: "3", r: "12", i: "2'" },
-                { n: "Leg 180 unilateral + 12 bilateral", s: "4", r: "10", i: "1'" },
-                { n: "Extensora máquina (progressão de carga)", s: "4", r: "12-10-8-8", i: "1'" },
-                { n: "Panturrilha em pé", s: "4", r: "12", i: "1'" }
-              ]
-            },
-            { id: "E", cor: "indigo", titulo: "TREINO E — COSTAS E BÍCEPS", 
-              exercicios: [
-                { n: "Mobilidade ombro + Retração/protração", s: "3", r: "12", i: "1'" },
-                { n: "Puxada frente aberto (pronada) + Supinada", s: "4", r: "12", i: "1'" },
-                { n: "Puxada frente triângulo", s: "3", r: "12", i: "1'" },
-                { n: "Remada serrote com halteres", s: "4", r: "10", i: "1'" },
-                { n: "Face pull + Crucifixo inverso com halteres", s: "4", r: "12", i: "1'" },
-                { n: "Rosca barra cross + Rosca inversa", s: "3", r: "12", i: "1'" },
-                { n: "Rosca concentrada", s: "4", r: "12", i: "1'" }
-              ]
-            },
-            { id: "F", cor: "pink", titulo: "TREINO F — GLÚTEO", 
-              exercicios: [
-                { n: "Mobilidade de Quadril", s: "3", r: "15", i: "1'" },
-                { n: "Elevação Pélvica (Barra ou Máquina)", s: "4", r: "12", i: "1:30'" },
-                { n: "Agachamento Búlgaro", s: "4", r: "10", i: "1:30'" },
-                { n: "Cadeira Abdutora", s: "4", r: "15", i: "1'" },
-                { n: "Extensão de Glúteo na Polia", s: "4", r: "12", i: "1'" }
-              ]
-            }
-        ];
-
-        // ===== CONFIGURAÇÕES BASES =====
-        const DIAS_SEMANA_NOME = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
-        const ROTINA_MENSAL_BASE = {
-            0: "🚴 Bike (Manhã cedo)", // Domingo
-            1: "🛌 Descanso ativo / Ergométrica", // Segunda
-            2: "🏋️ Academia (Treinos A/D/F alternados)", // Terça
-            3: "🏋️ Academia (Treinos B/E/C alternados)", // Quarta
-            4: "🧘 Pilates (7:00h)", // Quinta
-            5: "🏋️ Academia", // Sexta
-            6: "🏋️ Academia" // Sábado
-        };
-
-        // Regra exata dos teus Excel para aplicar o treino de cada dia
-        function getTreinoDoDia(diaSemana, diaMes) {
-            if(diaSemana === 0) return "🚴 Bike / Cardio Livre";
-            if(diaSemana === 1) return "🛌 Descanso ou Ergométrica";
-            if(diaSemana === 4) return "🧘 Pilates";
-            
-            // Lógica rotativa aproximada para musculação com base no teu calendário
-            const rotina = ["A — Peito e Tríceps", "B — Posterior", "D — Quadríceps", "E — Costas e Bíceps", "F — Glúteo", "C — Cardio & Core"];
-            // Usa o dia do mês para variar o treino na interface gerada
-            return "🏋️ Treino " + rotina[(diaMes + diaSemana) % rotina.length];
-        }
-
         const METAS_ESTUDOS = {
             fase1: { nome: "Fase 1 — Python", meta: 52, atuais: 2.5 },
             fase2: { nome: "Fase 2 — DS Core", meta: 108, atuais: 0 },
@@ -299,177 +260,309 @@
             "Fundamentos de Machine Learning", "Deep Learning e Redes", "Big data", "Visualização de Dados"
         ];
 
-        // ===== ESTADO GLOBAL =====
         let appData = {
             estudos: { ...METAS_ESTUDOS },
-            historicoTreinos: {}, // Armazena check de treinos por data: { "2026-05-18": true }
-            mbaDisciplinasData: {}, 
-            registosExtra: { ingles: [], mba: [], faculdade: [] }
+            historicoTreinos: {},
+            freqSemanalFaculdade: { seg: false, ter: false, qua: false, qui: false, sex: false },
+            mbaDisciplinasData: {},
+            customActivities: [
+                { id: "1680000000000", title: "Inglês", type: "hours", icon: "ph-translate", logs: {} },
+                { id: "1680000000001", title: "MBA Extra", type: "days", icon: "ph-briefcase", logs: {} }
+            ]
         };
 
-        // ===== TRANSIÇÕES E MODAIS =====
-        function changePage(pageId) {
-            document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
-            const target = document.getElementById(`page-${pageId}`);
-            if(target) target.classList.add('active');
+        let currentActiveCustomActivityId = null;
 
+        // ===== PROCESSAMENTO DE CONTEXTO E NAVEGAÇÃO =====
+        function changePage(pageId, customId = null) {
+            document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
+            
+            // Tratamento de telas dinâmicas
+            if(customId) {
+                currentActiveCustomActivityId = customId;
+                document.getElementById('page-dynamic-activity').classList.add('active');
+                renderPaginaAtividadeDinamica(customId);
+            } else {
+                const target = document.getElementById(`page-${pageId}`);
+                if(target) target.classList.add('active');
+            }
+
+            // Manipulação estética do menu lateral
             document.querySelectorAll('aside nav button').forEach(btn => {
                 btn.classList.remove('bg-slate-100', 'text-slate-900');
                 btn.classList.add('text-slate-500');
             });
-            const activeBtn = document.getElementById(`nav-${pageId}`);
+            
+            const activeBtn = customId ? document.getElementById(`nav-custom-${customId}`) : document.getElementById(`nav-${pageId}`);
             if(activeBtn) {
                 activeBtn.classList.remove('text-slate-500');
                 activeBtn.classList.add('bg-slate-100', 'text-slate-900');
             }
 
-            // Define mês atual por padrão se estiver na aba de treinos
-            if(pageId === 'treinos') {
-                const today = new Date();
-                let m = today.getMonth() + 1;
-                let a = today.getFullYear();
-                if(a < 2026) { a = 2026; m = 5; } // Ajuste para a tua linha do tempo
-                document.getElementById('select-mes-treino').value = `${a}-${m.toString().padStart(2, '0')}`;
-                renderTreinosMensal();
-            }
+            const today = new Date().toISOString().split('T')[0];
+            const inputDynData = document.getElementById('dyn-input-data');
+            if(inputDynData) inputDynData.value = today;
 
-            renderUI(); 
+            renderUI();
         }
 
-        function abrirFichasTreino() { document.getElementById('modal-fichas').classList.remove('hidden'); }
-        function fecharFichasTreino() { document.getElementById('modal-fichas').classList.add('hidden'); }
+        // ===== MOTOR DE CRIAÇÃO DE ATIVIDADES PERSONALIZADAS =====
+        function criarNovaAtividade() {
+            const titleInput = document.getElementById('custom-act-title');
+            const typeSelect = document.getElementById('custom-act-type');
+            const iconSelect = document.getElementById('custom-act-icon');
 
-        // ===== RENDERIZAR FICHAS DETALHADAS NA MODAL =====
-        function renderTabelasFichas() {
-            const container = document.getElementById('modal-fichas-content');
+            if(!titleInput.value.trim()) {
+                alert("Necessário preencher o nome do módulo.");
+                return;
+            }
+
+            const nova = {
+                id: Date.now().toString(),
+                title: titleInput.value.trim(),
+                type: typeSelect.value,
+                icon: iconSelect.value,
+                logs: {}
+            };
+
+            appData.customActivities.push(nova);
+            titleInput.value = '';
+            saveData();
+            renderSidebarCustomMenus();
+        }
+
+        function deletarAtividade(id) {
+            if(confirm("Confirmar a remoção definitiva deste módulo? Histórico será apagado.")) {
+                appData.customActivities = appData.customActivities.filter(a => a.id !== id);
+                saveData();
+                renderSidebarCustomMenus();
+                changePage('dashboard');
+            }
+        }
+
+        function renderSidebarCustomMenus() {
+            const sidebarContainer = document.getElementById('sidebar-custom-activities');
+            if(!sidebarContainer) return;
+            sidebarContainer.innerHTML = '';
+
+            appData.customActivities.forEach(act => {
+                sidebarContainer.innerHTML += `
+                    <button onclick="changePage('dynamic-activity', '${act.id}')" id="nav-custom-${act.id}" class="w-full flex items-center gap-3 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors text-slate-500 hover:bg-slate-50 hover:text-slate-900">
+                        <i class="ph ${act.icon} text-base"></i> <span class="truncate">${act.title}</span>
+                    </button>
+                `;
+            });
+        }
+
+        function renderGerenciadorModulos() {
+            const container = document.getElementById('custom-act-manage-list');
+            if(!container) return;
             container.innerHTML = '';
-            
-            FICHAS_TREINO.forEach(ficha => {
-                let linhas = '';
-                ficha.exercicios.forEach(ex => {
-                    linhas += `
-                        <tr class="border-b border-slate-50 hover:bg-slate-50 transition-colors">
-                            <td class="py-2.5 text-[13px] font-medium text-slate-700">${ex.n}</td>
-                            <td class="py-2.5 text-center text-[13px] text-slate-500">${ex.s}</td>
-                            <td class="py-2.5 text-center text-[13px] text-slate-500">${ex.r}</td>
-                            <td class="py-2.5 text-center text-[13px] text-slate-500">${ex.i}</td>
-                        </tr>
-                    `;
-                });
 
+            if(appData.customActivities.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-400 p-4 text-center">Nenhum módulo personalizado ativo.</p>`;
+                return;
+            }
+
+            appData.customActivities.forEach(act => {
                 container.innerHTML += `
-                    <div class="mb-8 border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-                        <div class="bg-slate-100 px-4 py-3 border-b border-slate-200">
-                            <h3 class="font-semibold text-slate-800 text-sm tracking-wide">${ficha.titulo}</h3>
+                    <div class="flex items-center justify-between p-4 hover:bg-slate-50 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-700"><i class="ph ${act.icon} text-lg"></i></div>
+                            <div>
+                                <h5 class="text-sm font-medium text-slate-800">${act.title}</h5>
+                                <p class="text-xs text-slate-400">Métrica: ${act.type === 'hours' ? 'Horas acumuladas' : 'Dias ativos'}</p>
+                            </div>
                         </div>
-                        <table class="w-full text-left">
-                            <thead class="bg-slate-50 text-[11px] uppercase text-slate-400">
-                                <tr>
-                                    <th class="py-2 px-4 font-medium">Exercício</th>
-                                    <th class="py-2 px-2 text-center font-medium w-16">Séries</th>
-                                    <th class="py-2 px-2 text-center font-medium w-24">Repetições</th>
-                                    <th class="py-2 px-2 text-center font-medium w-16">Pausa</th>
-                                </tr>
-                            </thead>
-                            <tbody class="px-4 block lg:table-row-group">
-                                ${linhas}
-                            </tbody>
-                        </table>
+                        <button onclick="deletarAtividade('${act.id}')" class="text-xs font-medium text-red-500 hover:text-red-700">Remover</button>
                     </div>
                 `;
             });
         }
 
-        // ===== RENDERIZAR CALENDÁRIO MENSAL DE TREINOS =====
-        function toggleTreinoMensal(dataStr) {
-            appData.historicoTreinos[dataStr] = !appData.historicoTreinos[dataStr];
-            saveData();
+        // ===== GERAÇÃO DA MATRIZ ANUAL (HEATMAP STYLE) =====
+        function renderPaginaAtividadeDinamica(id) {
+            const act = appData.customActivities.find(a => a.id === id);
+            if(!act) return;
+
+            document.getElementById('dyn-act-title').innerText = act.title;
+            document.getElementById('dyn-act-subtitle').innerText = `Gestão de acompanhamento por ${act.type === 'hours' ? 'horas computadas' : 'frequência de dias'}.`;
+            
+            const badge = document.getElementById('dyn-act-badge');
+            badge.innerHTML = `<span class="text-xs font-semibold px-2.5 py-1 ${act.type === 'hours' ? 'bg-indigo-50 text-indigo-700' : 'bg-amber-50 text-amber-700'} rounded-full">${act.type === 'hours' ? 'Controle de Carga Horária' : 'Controle de Frequência'}</span>`;
+
+            // Setup input condicional
+            const valContainer = document.getElementById('dyn-input-val-container');
+            if(act.type === 'hours') {
+                valContainer.innerHTML = `
+                    <label class="block text-xs font-medium text-slate-500 mb-1">Horas</label>
+                    <input type="number" step="0.5" id="dyn-input-value" placeholder="Ex: 2.5" class="w-full border border-slate-200 rounded-lg px-3 py-1.5 text-sm focus:outline-none">
+                `;
+            } else {
+                valContainer.innerHTML = `
+                    <label class="block text-xs font-medium text-slate-500 mb-1">Status</label>
+                    <select id="dyn-input-value" class="w-full border border-slate-200 rounded-lg px-3 py-1.5 text-sm focus:outline-none">
+                        <option value="1">Presença / Concluído</option>
+                        <option value="0">Ausência / Zerado</option>
+                    </select>
+                `;
+            }
+
+            // Construir Grade de Meses (Heatmap Linear de 12 Meses para 2026)
+            const matrixContainer = document.getElementById('dyn-act-heatmap-container');
+            matrixContainer.innerHTML = '';
+
+            const mesesNomes = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+            
+            // Estruturação em grid quadricular compacto por meses para melhor portabilidade horizontal
+            let gridHtml = `<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">`;
+
+            mesesNomes.forEach((nomeMes, indexMes) => {
+                const diasNoMes = new Date(2026, indexMes + 1, 0).getDate();
+                let celulasDias = '';
+
+                for(let dia = 1; dia <= diasNoMes; dia++) {
+                    const dataChave = `2026-${(indexMes+1).toString().padStart(2,'0')}-${dia.toString().padStart(2,'0')}`;
+                    const valorLogado = act.logs[dataChave] || 0;
+                    
+                    // Definição de cores base do Heatmap conforme a intensidade do preenchimento
+                    let corClasse = 'bg-slate-100 hover:bg-slate-200';
+                    if(act.type === 'days' && valorLogado > 0) corClasse = 'bg-indigo-600';
+                    if(act.type === 'hours' && valorLogado > 0) {
+                        if(valorLogado <= 1) corClasse = 'bg-indigo-200';
+                        else if(valorLogado <= 3) corClasse = 'bg-indigo-400';
+                        else corClasse = 'bg-indigo-600';
+                    }
+
+                    celulasDias += `
+                        <div onclick="interacaoDiretaCelulaHeatmap('${act.id}', '${dataChave}')" 
+                             title="Data: ${dia}/${indexMes+1}/2026 | Valor: ${valorLogado}" 
+                             class="w-3.5 h-3.5 rounded-sm cursor-pointer ${corClasse} text-[0px]">
+                        </div>
+                    `;
+                }
+
+                gridHtml += `
+                    <div class="bg-slate-50 border border-slate-100 p-3 rounded-xl">
+                        <span class="text-[11px] font-semibold text-slate-500 block mb-2">${nomeMes}</span>
+                        <div class="flex flex-wrap gap-1">
+                            ${celulasDias}
+                        </div>
+                    </div>
+                `;
+            });
+
+            gridHtml += `</div>`;
+            matrixContainer.innerHTML = gridHtml;
         }
 
+        function salvarLogManualDinamico() {
+            if(!currentActiveCustomActivityId) return;
+            const act = appData.customActivities.find(a => a.id === currentActiveCustomActivityId);
+            if(!act) return;
+
+            const data = document.getElementById('dyn-input-data').value;
+            const valRaw = document.getElementById('dyn-input-value').value;
+            const valor = parseFloat(valRaw);
+
+            if(data && !isNaN(valor)) {
+                if(valor === 0) {
+                    delete act.logs[data];
+                } else {
+                    act.logs[data] = valor;
+                }
+                saveData();
+                renderPaginaAtividadeDinamica(act.id);
+            }
+        }
+
+        function interacaoDiretaCelulaHeatmap(actId, dataChave) {
+            const act = appData.customActivities.find(a => a.id === actId);
+            if(!act) return;
+
+            if(act.type === 'days') {
+                const atual = act.logs[dataChave] || 0;
+                if(atual > 0) delete act.logs[dataChave];
+                else act.logs[dataChave] = 1;
+            } else {
+                const atual = act.logs[dataChave] || 0;
+                const entrada = prompt(`Inserir carga horária para o dia ${dataChave}:`, atual);
+                const valor = parseFloat(entrada);
+                if(!isNaN(valor) && valor > 0) act.logs[dataChave] = valor;
+                else delete act.logs[dataChave];
+            }
+            saveData();
+            renderPaginaAtividadeDinamica(act.id);
+        }
+
+        function renderCustomSummaryDashboard() {
+            const grid = document.getElementById('dash-custom-summary-grid');
+            if(!grid) return;
+            grid.innerHTML = '';
+
+            if(appData.customActivities.length === 0) {
+                grid.innerHTML = `<p class="text-xs text-slate-400 col-span-full py-4">Nenhum módulo customizado disponível no momento.</p>`;
+                return;
+            }
+
+            appData.customActivities.forEach(act => {
+                let totalAcumulado = 0;
+                Object.values(act.logs).forEach(v => totalAcumulado += v);
+
+                const sufixo = act.type === 'hours' ? 'h acumuladas' : 'dias ativos';
+
+                grid.innerHTML += `
+                    <div onclick="changePage('dynamic-activity', '${act.id}')" class="bg-slate-50 border border-slate-100 p-4 rounded-xl flex items-center gap-4 cursor-pointer hover:border-slate-300 transition-colors">
+                        <div class="w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center"><i class="ph ${act.icon} text-xl"></i></div>
+                        <div>
+                            <p class="text-xs text-slate-500 font-medium">${act.title}</p>
+                            <p class="text-2xl font-light text-slate-900">${totalAcumulado.toFixed(act.type === 'hours' ? 1 : 0)}<span class="text-xs text-slate-400 font-normal ml-1">${sufixo}</span></p>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // ===== PROCESSAMENTO REUSADO DOS MODULOS ORIGINAIS =====
         function renderTreinosMensal() {
             const container = document.getElementById('workout-month-list');
             if(!container) return;
-            
-            const mesSelect = document.getElementById('select-mes-treino').value; // ex: "2026-05"
+            const mesSelect = document.getElementById('select-mes-treino').value;
             const [ano, mes] = mesSelect.split('-').map(Number);
-            
             const diasNoMes = new Date(ano, mes, 0).getDate();
             const mesNomes = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
             
             container.innerHTML = '';
-            let treinosConcluidosNoMes = 0;
+            let concluidos = 0;
 
-            for(let dia = 1; dia <= diasNoMes; dia++) {
-                const dataObj = new Date(ano, mes - 1, dia);
-                const diaSemana = dataObj.getDay();
-                
-                // Formato da chave no objeto (ex: 2026-05-01)
-                const dataStr = `${ano}-${mes.toString().padStart(2,'0')}-${dia.toString().padStart(2,'0')}`;
+            for(let d = 1; d <= diasNoMes; d++) {
+                const dataStr = `${ano}-${mes.toString().padStart(2,'0')}-${d.toString().padStart(2,'0')}`;
                 const isFeito = appData.historicoTreinos[dataStr] || false;
-                if(isFeito) treinosConcluidosNoMes++;
-
-                const treinoDoDia = getTreinoDoDia(diaSemana, dia);
-                const diaSemanaNome = DIAS_SEMANA_NOME[diaSemana].substring(0,3);
+                if(isFeito) concluidos++;
 
                 container.innerHTML += `
-                    <div class="flex items-center justify-between p-3.5 hover:bg-slate-50 transition-colors cursor-pointer border-b border-slate-50" onclick="toggleTreinoMensal('${dataStr}')">
-                        <div class="flex items-center gap-4">
-                            <div class="w-6 h-6 rounded border shrink-0 ${isFeito ? 'bg-emerald-500 border-emerald-500 flex items-center justify-center text-white' : 'border-slate-300 bg-white'}">
-                                ${isFeito ? '<i class="ph-bold ph-check text-sm"></i>' : ''}
+                    <div class="flex items-center justify-between p-3 border-b border-slate-50 hover:bg-slate-50 transition-colors cursor-pointer" onclick="appData.historicoTreinos['${dataStr}']=!appData.historicoTreinos['${dataStr}']; saveData();">
+                        <div class="flex items-center gap-3">
+                            <div class="w-5 h-5 rounded border ${isFeito ? 'bg-emerald-500 border-emerald-500' : 'border-slate-300'} flex items-center justify-center text-white text-xs">
+                                ${isFeito ? '✓' : ''}
                             </div>
-                            <div class="flex gap-4 sm:gap-6 items-center">
-                                <div class="w-14 text-center">
-                                    <span class="block text-xs font-semibold text-slate-400 uppercase leading-none">${diaSemanaNome}</span>
-                                    <span class="block text-lg font-light ${isFeito ? 'text-slate-400' : 'text-slate-800'}">${dia.toString().padStart(2,'0')}</span>
-                                </div>
-                                <div>
-                                    <p class="text-sm ${isFeito ? 'text-slate-400 line-through' : 'text-slate-700 font-medium'}">${treinoDoDia}</p>
-                                </div>
-                            </div>
+                            <span class="text-xs font-semibold text-slate-400 w-8">${d.toString().padStart(2,'0')}</span>
+                            <span class="text-sm ${isFeito ? 'text-slate-400 line-through' : 'text-slate-700'}">Treino Registrado</span>
                         </div>
                     </div>
                 `;
             }
 
-            // Atualiza Dashboard Resumo Mensal
-            document.getElementById('dash-mes-label').innerText = `Mês: ${mesNomes[mes-1]}`;
-            document.getElementById('dash-treinos-feitos').innerText = treinosConcluidosNoMes;
-            document.getElementById('dash-treinos-total').innerText = `/ ${diasNoMes} dias`;
-            
-            const perc = (treinosConcluidosNoMes / diasNoMes) * 100;
-            document.getElementById('dash-progress-treinos').style.width = `${perc}%`;
+            const label = document.getElementById('dash-mes-label');
+            if(label) label.innerText = `Mês: ${mesNomes[mes-1]}`;
+            const feitos = document.getElementById('dash-treinos-feitos');
+            if(feitos) feitos.innerText = concluidos;
+            const total = document.getElementById('dash-treinos-total');
+            if(total) total.innerText = `/ ${diasNoMes} dias`;
+            const bar = document.getElementById('dash-progress-treinos');
+            if(bar) bar.style.width = `${(concluidos/diasNoMes)*100}%`;
         }
 
-
-        // ===== INFRAESTRUTURA DE DADOS (LOCAL STORAGE) =====
-        function loadData() {
-            const saved = localStorage.getItem('luizaTrackerDataV4');
-            if (saved) {
-                const parsed = JSON.parse(saved);
-                if(parsed.estudos) appData.estudos = parsed.estudos;
-                if(parsed.historicoTreinos) appData.historicoTreinos = parsed.historicoTreinos;
-                if(parsed.registosExtra) appData.registosExtra = parsed.registosExtra;
-                
-                if(parsed.mbaDisciplinasData) {
-                    LISTA_DISCIPLINAS_MBA.forEach(d => {
-                        appData.mbaDisciplinasData[d] = parsed.mbaDisciplinasData[d] || { presencas: 0, faltas: 0, mencao: "" };
-                    });
-                }
-            } else {
-                LISTA_DISCIPLINAS_MBA.forEach(d => { appData.mbaDisciplinasData[d] = { presencas: 0, faltas: 0, mencao: "" }; });
-            }
-            
-            ['ingles', 'mba', 'faculdade'].forEach(cat => setupFormularioExtra(cat));
-            renderTabelasFichas();
-            changePage('dashboard'); // Inicia no Dashboard
-        }
-
-        function saveData() {
-            localStorage.setItem('luizaTrackerDataV4', JSON.stringify(appData));
-            renderUI();
-        }
-
-        // ===== RENDERIZADORES COMPLEMENTARES (Estudos, Formação) =====
         function adicionarHorasEstudo() {
             const fase = document.getElementById('select-fase').value;
             const horas = parseFloat(document.getElementById('input-horas').value);
@@ -490,115 +583,55 @@
                 totalHoras += fase.atuais;
                 const percent = Math.min((fase.atuais / fase.meta) * 100, 100).toFixed(1);
                 container.innerHTML += `
-                    <div class="border border-slate-100 rounded-xl p-5 bg-white">
-                        <div class="flex justify-between items-center mb-2">
-                            <h4 class="font-medium text-sm text-slate-800">${fase.nome}</h4>
-                            <span class="text-xs font-medium text-slate-500">${fase.atuais}h / ${fase.meta}h</span>
+                    <div class="border border-slate-100 rounded-xl p-4 bg-white">
+                        <div class="flex justify-between items-center mb-1">
+                            <h4 class="font-medium text-xs text-slate-700">${fase.nome}</h4>
+                            <span class="text-[11px] font-medium text-slate-400">${fase.atuais}h / ${fase.meta}h</span>
                         </div>
-                        <div class="w-full bg-slate-100 rounded-full h-1.5"><div class="bg-blue-500 h-1.5 rounded-full" style="width: ${percent}%"></div></div>
+                        <div class="w-full bg-slate-100 rounded-full h-1"><div class="bg-blue-500 h-1 rounded-full" style="width: ${percent}%"></div></div>
                     </div>
                 `;
             });
-
             document.getElementById('dash-total-horas').innerText = totalHoras.toFixed(1);
             document.getElementById('dash-progress-estudos').style.width = `${Math.min((totalHoras / 262) * 100, 100)}%`;
         }
 
-        function setupFormularioExtra(categoria) {
-            const container = document.getElementById(`container-${categoria}`);
-            if(!container) return;
-
-            let placeholderAssunto = "Ex: Aula, Capítulo, Projeto...";
-            container.innerHTML = `
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-6 mt-6">
-                    <h3 class="text-sm font-semibold text-slate-700 mb-4 flex items-center gap-2"><i class="ph ph-clock-counter-clockwise"></i> Adicionar Registro de Horas</h3>
-                    <div class="flex flex-col md:flex-row gap-4 mb-4">
-                        <div class="w-full md:w-40">
-                            <label class="block text-xs font-medium text-slate-500 mb-1.5">Data</label>
-                            <input type="date" id="input-data-${categoria}" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm">
-                        </div>
-                        <div class="w-full md:w-32">
-                            <label class="block text-xs font-medium text-slate-500 mb-1.5">Horas</label>
-                            <input type="number" step="0.5" id="input-horas-${categoria}" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm">
-                        </div>
-                        <div class="flex-1">
-                            <label class="block text-xs font-medium text-slate-500 mb-1.5">Tópico Estudado</label>
-                            <input type="text" id="input-assunto-${categoria}" placeholder="${placeholderAssunto}" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm">
-                        </div>
-                    </div>
-                    <div class="flex justify-end">
-                        <button onclick="adicionarRegistroExtra('${categoria}')" class="bg-slate-900 text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition">Registar Sessão</button>
-                    </div>
-                </div>
-                <div class="flex items-center justify-between mb-4"><h3 class="text-lg font-medium text-slate-800">Histórico</h3></div>
-                <div id="lista-${categoria}" class="space-y-3"></div>
-            `;
-        }
-
-        function adicionarRegistroExtra(categoria) {
-            const data = document.getElementById(`input-data-${categoria}`).value;
-            const horas = parseFloat(document.getElementById(`input-horas-${categoria}`).value);
-            const assunto = document.getElementById(`input-assunto-${categoria}`).value;
-
-            if (data && !isNaN(horas) && horas > 0 && assunto.trim() !== "") {
-                appData.registosExtra[categoria].unshift({ id: Date.now(), data, horas, assunto });
-                saveData();
+        // ===== DATA PERSISTENCE COMPLIANCE =====
+        function loadData() {
+            const saved = localStorage.getItem('luizaTrackerDataV5');
+            if (saved) {
+                appData = JSON.parse(saved);
             }
-        }
-
-        function apagarRegistroExtra(categoria, id) {
-            if(confirm("Eliminar registo?")) {
-                appData.registosExtra[categoria] = appData.registosExtra[categoria].filter(reg => reg.id !== id);
-                saveData();
-            }
-        }
-
-        function renderRegistosExtra() {
-            ['ingles', 'mba', 'faculdade'].forEach(categoria => {
-                const containerLista = document.getElementById(`lista-${categoria}`);
-                if(!containerLista) return;
-                containerLista.innerHTML = '';
-                
-                const registos = appData.registosExtra[categoria] || [];
-                let totalHoras = 0;
-
-                registos.forEach(reg => {
-                    totalHoras += reg.horas;
-                    const [ano, mes, dia] = reg.data.split('-');
-                    containerLista.innerHTML += `
-                        <div class="bg-white p-4 rounded-xl border border-slate-100 flex justify-between items-center">
-                            <div>
-                                <span class="text-[10px] px-1.5 py-0.5 bg-slate-100 text-slate-500 rounded mr-2">${dia}/${mes}/${ano}</span>
-                                <span class="text-sm font-medium text-slate-800">${reg.assunto}</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <span class="text-sm font-semibold text-slate-700">${reg.horas}h</span>
-                                <button onclick="apagarRegistroExtra('${categoria}', ${reg.id})" class="text-xs text-red-400">Apagar</button>
-                            </div>
-                        </div>
-                    `;
-                });
-
-                const elDashHoras = document.getElementById(`dash-horas-${categoria}`);
-                if(elDashHoras) elDashHoras.innerHTML = `${totalHoras.toFixed(1)}<span class="text-sm text-slate-400">h</span>`;
-            });
-        }
-
-        function renderMBA() {
-            const grid = document.getElementById('grid-mba-disciplinas');
-            if(!grid) return; grid.innerHTML = '';
             
-            LISTA_DISCIPLINAS_MBA.forEach(nome => {
-                const dados = appData.mbaDisciplinasData[nome];
-                grid.innerHTML += `<div class="bg-white border border-slate-100 rounded-2xl p-4 flex flex-col justify-between"><h4 class="text-xs font-semibold text-slate-700 mb-3">${nome}</h4><div class="flex justify-between items-center text-xs"><span class="text-slate-500">Pres: ${dados.presencas} | Faltas: ${dados.faltas}</span><div class="flex gap-1"><button onclick="appData.mbaDisciplinasData['${nome}'].presencas++; saveData()" class="px-2 py-1 bg-slate-100 rounded">+</button><button onclick="appData.mbaDisciplinasData['${nome}'].presencas = Math.max(0, appData.mbaDisciplinasData['${nome}'].presencas - 1); saveData()" class="px-2 py-1 bg-slate-50 rounded text-red-500">-</button></div></div></div>`;
-            });
+            // Popular seletor de meses fitness caso vazio
+            const selectTreino = document.getElementById('select-mes-treino');
+            if(selectTreino && selectTreino.innerHTML === '') {
+                selectTreino.innerHTML = `
+                    <option value="2026-05">Maio 2026</option>
+                    <option value="2026-06" selected>Junho 2026</option>
+                    <option value="2026-07">Julho 2026</option>
+                    <option value="2026-08">Agosto 2026</option>
+                    <option value="2026-09">Setembro 2026</option>
+                    <option value="2026-10">Outubro 2026</option>
+                    <option value="2026-11">Novembro 2026</option>
+                    <option value="2026-12">Dezembro 2026</option>
+                `;
+            }
+
+            renderSidebarCustomMenus();
+            renderUI();
+        }
+
+        function saveData() {
+            localStorage.setItem('luizaTrackerDataV5', JSON.stringify(appData));
+            renderUI();
         }
 
         function renderUI() {
             renderEstudos();
             renderTreinosMensal();
-            renderMBA();
-            renderRegistosExtra();
+            renderGerenciadorModulos();
+            renderCustomSummaryDashboard();
         }
 
         window.onload = () => { loadData(); };
